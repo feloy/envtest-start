@@ -4,7 +4,7 @@
 named `envtest-kubeconfig` in the TMP directory of the system.
 
 
-## Requisites
+## Prerequisite
 
 Install `setup-envtest`, install a version of envtest and set in `KUBEBUILDER_ASSETS` the path in which it is installed:
 
