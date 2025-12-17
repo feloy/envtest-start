@@ -24,8 +24,13 @@ func main() {
 
 	defer testEnv.Stop()
 
+	var kubeconfigPath string
+	if len(os.Args) > 1 {
+		kubeconfigPath = os.Args[1]
+	} else {
+		kubeconfigPath = filepath.Join(os.TempDir(), "envtest-kubeconfig")
+	}
 	// Write kubeconfig file
-	kubeconfigPath := filepath.Join(os.TempDir(), "envtest-kubeconfig")
 	kubeconfig := clientcmdapi.Config{
 		Clusters: map[string]*clientcmdapi.Cluster{
 			"envtest": {

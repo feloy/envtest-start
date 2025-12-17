@@ -37,11 +37,11 @@ jobs:
 
       - name: Run envtest-start
         run: |
-          ./envtest-start &
-          echo "KUBECONFIG=/tmp/envtest-kubeconfig" >> $GITHUB_ENV
+          ./envtest-start /tmp/my-custom-kubeconfig-file &
+          echo "KUBECONFIG=/tmp/my-custom-kubeconfig-file" >> $GITHUB_ENV
 
-      - name: run tests
-        run: ${KUBEBUILDER_ASSETS}/kubectl get pods
+      - name: check that a "kubernetes" service is present
+        run: ${KUBEBUILDER_ASSETS}/kubectl get all | grep 'service/kubernetes'
 
       - name: stop envtest-start
         run: pkill -f envtest-start
