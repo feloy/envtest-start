@@ -45,3 +45,14 @@ jobs:
 
       - name: stop envtest-start
         run: pkill -f envtest-start
+
+      - name: Run envtest-start with users
+        run: |
+          ./envtest-start --users 2 /tmp/my-custom-kubeconfig-file &
+          echo "KUBECONFIG=/tmp/my-custom-kubeconfig-file" >> $GITHUB_ENV
+
+      - name: check that kubeconfig files for users are present
+        run: ls /tmp/user1-kubeconfig /tmp/user2-kubeconfig /tmp/my-custom-kubeconfig-file
+
+      - name: stop envtest-start
+        run: pkill -f envtest-start
